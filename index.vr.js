@@ -13,7 +13,7 @@ export default class WelcomeToVR extends React.Component {
     render() {
         return (
             <View>
-                <Pano source={asset('222.jpg')}/>
+                <Pano source={asset('333.jpg')}/>
                 <NestedMessage message={"Default Message"}/>
             </View>
         );
@@ -24,19 +24,26 @@ class  NestedMessage extends React.Component {
 
     constructor() {
         super();
-        this.state = {message: "ReactVr Start Message"};
-        setInterval(() => {
-            this.setState({ message: "Interval Up Message"});
-        },6000);
+        this.state = {message: "ReactVR", showMessage: true};
+        // setInterval(() => {
+        //     this.setState({ message: "Hello From ReactVr Project"});
+        // },5000);
+    }
+
+    componentDidMount () {
+        this.setState({ showMessage: true });
     }
 
     handleClick () {
-        this.setState ({message: "Button Up Message"});
+        this.setState ({message: "Button Pressed"});
     }
 
     render() {
+        const showMessage = this.state.showMessage;
+
         return (
             <View>
+                {showMessage ?(
                 <VrButton
                 onClick={this.handleClick.bind(this)}
                 >
@@ -59,9 +66,14 @@ class  NestedMessage extends React.Component {
                             ],
                         }}>
                         {this.state.message}
-                        , {this.props.message}
+                        {/*, {this.props.message}*/}
                     </Text>
                 </VrButton>
+                    ) : (
+                        <Text>
+                             Hello From ReactVr
+                        </Text>
+                    ) }
             </View>
         );
     }
